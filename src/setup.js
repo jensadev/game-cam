@@ -14,7 +14,7 @@ export function setup(canvas) {
   console.log(loader.isReady())
   
   const runGame = () => {
-      const game = new Game(canvas.width, canvas.height, loader)
+      const game = new Game(canvas, loader)
       let lastTime = 0
 
     const animate = (timeStamp) => {

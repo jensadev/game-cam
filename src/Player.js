@@ -1,25 +1,45 @@
 export default class Player {
-  constructor(game) {
+  constructor(game, x, y) {
     this.game = game
     this.width = 32
     this.height = 32
     this.speed = 5
-    this.x = game.width / 2 - this.width / 2
-    this.y = game.height - this.height - 10
+    this.x = x
+    this.y = y
+    this.facing = {
+      x: 0,
+      y: 0
+    }
   }
 
   update(deltaTime) {
     if (this.game.keys.has('ArrowLeft')) {
-      this.x -= this.speed
+      const newX = this.x - this.speed;
+      if (newX >= 0) {
+        this.x = newX;
+        this.facing.x = -1;
+      }
     }
     if (this.game.keys.has('ArrowRight')) {
-      this.x += this.speed
+      const newX = this.x + this.speed;
+      if (newX <= this.game.map.width - this.width) {
+        this.x = newX;
+        this.facing.x = 1;
+      }
     }
     if (this.game.keys.has('ArrowUp')) {
-      this.y -= this.speed
+      const newY = this.y - this.speed;
+      if (newY >= 0) {
+        this.y = newY;
+        this.facing.y = -1;
+      }
     }
     if (this.game.keys.has('ArrowDown')) {
-      this.y += this.speed
+      const newY = this.y + this.speed;
+      if (newY <= this.game.map.height - this.height) {
+        this.y = newY;
+        this.facing.y = 1;
+      }
     }
   }
 
@@ -33,6 +53,8 @@ export default class Player {
       context.fillStyle = '#fff'
       context.font = '12px Arial'
       context.fillText(`x:${this.x}, y:${this.y}`, this.x, this.y - 5)
+      context.fillText(`facing: ${this.facing.x}, ${this.facing.y}`, this.x, this.y + 20)
+      context.fillText(`speed: ${this.speed}`, this.x, this.y + 40)
     }
   }
 }
