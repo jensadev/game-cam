@@ -1,6 +1,7 @@
 export default class Camera {
-  constructor(game, x, y, width, height, lerp = 0.08) {
+  constructor(game, target, x, y, width, height, lerp = 0.08) {
     this.game = game
+    this.target = target
     this.x = x
     this.y = y
     this.width = width
@@ -10,13 +11,13 @@ export default class Camera {
     this.lookaheadDistance = 40
   }
 
-  update(target) {
-    let targetX = target.x - this.width / 2;
-    let targetY = target.y - this.height / 2;
+  update() {
+    let targetX = this.target.x - this.width / 2;
+    let targetY = this.target.y - this.height / 2;
   
-    if (target.facing) {
-      targetX += target.facing.x * this.lookaheadDistance;
-      targetY += target.facing.y * this.lookaheadDistance;
+    if (this.target.facing) {
+      targetX += this.target.facing.x * this.lookaheadDistance;
+      targetY += this.target.facing.y * this.lookaheadDistance;
     }
 
     const t = this.lerp;
@@ -35,6 +36,11 @@ export default class Camera {
       context.fillStyle = '#fff'
       context.font = '12px Arial'
       context.fillText(`x: ${Math.round(this.x)}, y: ${Math.round(this.y)}`, this.x + this.offset + 10, this.y + this.offset * 2)
+      context.fillText(`target: ${this.target.x}, ${this.target.y}`, this.x + this.offset + 10, this.y + this.offset * 3)
     }
+  }
+
+  setTarget(target) {
+    this.target = target
   }
 }

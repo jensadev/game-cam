@@ -18,12 +18,17 @@ export default class Game {
     this.debug = false
 
     this.player = new Player(this, this.canvas.width / 2, this.canvas.height / 2)
-    this.camera = new Camera(this, this.player.x - this.canvas.width / 2, this.player.y - this.canvas.height / 2, this.canvas.width, this.canvas.height)
+    this.camera = new Camera(this, this.player, this.player.x - this.canvas.width / 2, this.player.y - this.canvas.height / 2, this.canvas.width, this.canvas.height)
     }
 
   update(deltaTime) {
     this.player.update(deltaTime)
-    this.camera.update(this.player)
+    if (this.keys.has('p')) {
+      this.camera.setTarget({ x: 2000, y: 2000})
+    } else {
+      this.camera.setTarget(this.player)
+    }
+    this.camera.update()
   }
 
   draw(context) {
