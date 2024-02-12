@@ -1,5 +1,5 @@
 export default class Player {
-  constructor(game, x, y) {
+  constructor(game,{ x, y } ) {
     this.game = game
     this.width = 32
     this.height = 32
@@ -22,7 +22,7 @@ export default class Player {
     }
     if (this.game.keys.has('ArrowRight')) {
       const newX = this.x + this.speed;
-      if (newX <= this.game.level.width - this.width) {
+      if (newX <= (this.game.level.width * this.game.level.tileWidth) - this.width) {
         this.x = newX;
         this.facing.x = 1;
       }
@@ -36,7 +36,7 @@ export default class Player {
     }
     if (this.game.keys.has('ArrowDown')) {
       const newY = this.y + this.speed;
-      if (newY <= this.game.level.height - this.height) {
+      if (newY <= (this.game.level.height * this.game.level.tileHeight) - this.height) {
         this.y = newY;
         this.facing.y = 1;
       }

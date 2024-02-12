@@ -25,8 +25,8 @@ export default class Camera {
     this.y += (targetY - this.y) * t * (2 - t);
   
     // Clamp the camera position to the game world
-    this.x = Math.max(0, Math.min(this.x, this.game.level.width - this.width));
-    this.y = Math.max(0, Math.min(this.y, this.game.level.height - this.height));
+    this.x = Math.max(0, Math.min(this.x, (this.game.level.width * this.game.level.tileWidth) - this.width));
+    this.y = Math.max(0, Math.min(this.y, (this.game.level.height * this.game.level.tileHeight) - this.height));
   }
 
   draw(context) {
