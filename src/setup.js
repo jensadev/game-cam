@@ -8,7 +8,9 @@ export function setup(canvas) {
 
   const loader = new Loader()
   loader.loadImages([
-
+  ])
+  loader.loadJSON([
+    {name: "testmap", src: "./src/assets/tiled/test.tmj"}
   ])
 
   console.log(loader.isReady())

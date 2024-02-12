@@ -63,6 +63,7 @@ export default class Loader {
         this.json[file.name] = data
         this.loaded++
       }).catch((error) => {
+        console.log(error)
         console.error(`Failed to load json: ${file.src}`)
       })
   }

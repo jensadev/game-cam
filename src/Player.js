@@ -22,7 +22,7 @@ export default class Player {
     }
     if (this.game.keys.has('ArrowRight')) {
       const newX = this.x + this.speed;
-      if (newX <= this.game.map.width - this.width) {
+      if (newX <= this.game.level.width - this.width) {
         this.x = newX;
         this.facing.x = 1;
       }
@@ -36,7 +36,7 @@ export default class Player {
     }
     if (this.game.keys.has('ArrowDown')) {
       const newY = this.y + this.speed;
-      if (newY <= this.game.map.height - this.height) {
+      if (newY <= this.game.level.height - this.height) {
         this.y = newY;
         this.facing.y = 1;
       }
